@@ -1,0 +1,39 @@
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
+  <mdb-navbar-brand><a class="navbar-brand white-text" routerLink="/">Training App</a></mdb-navbar-brand>
+  <links>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/" routerLinkActive="active">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/todos" routerLinkActive="active">Todos</a>
+      </li>
+
+      <!-- Links for mobile -->
+      <li class="nav-item">
+        <a class="nav-link waves-light white-text d-lg-none" mdbWavesEffect routerLink="/sign-in">
+          Sign in
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light white-text d-lg-none" mdbWavesEffect routerLink="/sign-up">
+          Sing Up
+        </a>
+      </li>
+
+    </ul>
+
+    <!-- Links for desktop -->
+    <a class="nav-link waves-light white-text d-none d-lg-block" mdbWavesEffect routerLink="/sign-in">Sign in</a>
+    <a class="nav-link waves-light white-text d-none d-lg-block" mdbWavesEffect routerLink="/sign-up">
+      <button mdbBtn color="white" outline="true" size="sm" type="button" mdbWavesEffect>
+        Sign up
+      </button>
+    </a>
+
+    <ng-template #logged>
+      <a class="nav-link waves-light white-text" mdbWavesEffect routerLink="/logout">Logout</a>
+    </ng-template>
+
+  </links>
+</mdb-navbar>
