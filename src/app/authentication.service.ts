@@ -26,7 +26,6 @@ export interface TokenPayload {
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   private token: string;
-  isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -52,13 +51,21 @@ export class AuthenticationService {
 
   public logout(): void {
     this.token = '';
-    this.isLoggedIn.next(false);
     localStorage.removeItem('access_token');
     this.router.navigate(['/']);
   }
 
   public profile(): Observable<any> {
     return this.request('get', 'profile');
+  }
+
+  public isLoggedIn(): boolean {
+    const user = this.getUserDetails();
+    if (user) {
+      return user.exp > Date.now() / 1000;
+    } else {
+      return false;
+    }
   }
 
   private saveToken(token: string): void {
@@ -92,7 +99,6 @@ export class AuthenticationService {
       map((data: TokenResponse) => {
         if (data.token) {
           this.saveToken(data.token);
-          this.isLoggedIn.next(true);
         }
         return data;
       }),

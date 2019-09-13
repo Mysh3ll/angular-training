@@ -1,1 +1,37 @@
-<p>sign-in works!</p>
+<div *ngIf="errorMessage" #alert class="alert alert-danger alert-dismissible fade show" role="alert">
+  <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <strong>Error!</strong> {{ errorMessage }}
+</div>
+
+<form class="text-center border border-light p-5" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+
+  <p class="h4 mb-4">Sign In</p>
+
+  <!-- Email -->
+  <input
+    type="email"
+    formControlName="email"
+    id="SignUpFormEmail"
+    mdbInput
+    email
+    class="form-control mb-4"
+    placeholder="E-mail">
+
+  <!-- Email -->
+  <input
+    type="password"
+    formControlName="password"
+    id="SignUpFormPassword"
+    mdbInput
+    class="form-control mb-4"
+    placeholder="Password">
+
+  <!-- Send button -->
+  <button mdbBtn color="info" outline="true" block="true" class="z-depth-0 my-4 waves-effect"
+          mdbWavesEffect type="submit" [disabled]="!signInForm.valid">Send
+  </button>
+
+</form>
+<!-- Default form register -->

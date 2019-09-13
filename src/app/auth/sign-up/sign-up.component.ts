@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthenticationService, TokenPayload } from '../../authentication.service';
@@ -16,11 +16,6 @@ export class SignUpComponent implements OnInit {
   @ViewChild('alert', { static: false }) alert: ElementRef;
 
   signUpForm: FormGroup;
-  credentials: TokenPayload = {
-    email: '',
-    password: '',
-  };
-
   errorMessage: string = '';
 
   onSubmit() {
