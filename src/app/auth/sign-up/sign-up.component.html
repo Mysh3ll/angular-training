@@ -1,0 +1,52 @@
+<div *ngIf="errorMessage" #alert class="alert alert-danger alert-dismissible fade show" role="alert">
+  <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <strong>Error!</strong> {{ errorMessage }}
+</div>
+
+<!--<form (submit)="signUp()">-->
+<!--  <div class="form-group">-->
+<!--    <label for="email">Email address</label>-->
+<!--    <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email">-->
+<!--  </div>-->
+<!--  <div class="form-group">-->
+<!--    <label for="password">Password</label>-->
+<!--    <input type="password" class="form-control" name="password" placeholder="Password"-->
+<!--           [(ngModel)]="credentials.password">-->
+<!--  </div>-->
+<!--  <button type="submit" class="btn btn-default">Register!</button>-->
+<!--</form>-->
+
+
+<!-- Default form register -->
+<form class="text-center border border-light p-5" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+
+  <p class="h4 mb-4">Sign Up</p>
+
+  <!-- Email -->
+  <input
+    type="email"
+    formControlName="email"
+    id="SignUpFormEmail"
+    mdbInput
+    email
+    class="form-control mb-4"
+    placeholder="E-mail">
+
+  <!-- Email -->
+  <input
+    type="password"
+    formControlName="password"
+    id="SignUpFormPassword"
+    mdbInput
+    class="form-control mb-4"
+    placeholder="Password">
+
+  <!-- Send button -->
+  <button mdbBtn color="info" outline="true" block="true" class="z-depth-0 my-4 waves-effect"
+          mdbWavesEffect type="submit" [disabled]="!signUpForm.valid">Send
+  </button>
+
+</form>
+<!-- Default form register -->
