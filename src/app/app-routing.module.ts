@@ -5,12 +5,13 @@ import { HomeComponent } from './home/home.component';
 import { QuestionComponent } from './question/question.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
+import { AuthGuardService } from './auth-guard.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: 'questions', component: QuestionComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'sign-in', component: SignInComponent },
+  { path: 'questions', component: QuestionComponent, canActivate: [AuthGuardService] },
 ];
 
 @NgModule({
