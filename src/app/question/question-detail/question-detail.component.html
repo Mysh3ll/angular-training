@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-8 mx-auto my-5">
+    <mdb-card *ngIf="question">
+      <!--Card image-->
+      <mdb-card-img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg" alt="Card image cap"></mdb-card-img>
+      <!--Card content-->
+      <mdb-card-body>
+
+        <!--Title-->
+        <mdb-card-title>
+          <h4>{{question.title}}</h4>
+        </mdb-card-title>
+
+        <!--Text-->
+        <mdb-card-text>
+          <p>{{question.description}}</p>
+          <p>{{question.createdAt | date: 'fullDate'}}</p>
+        </mdb-card-text>
+
+        <a routerLink="/questions" mdbBtn color="accent" mdbWavesEffect>Go Back</a>
+      </mdb-card-body>
+    </mdb-card>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
@@ -12,6 +12,8 @@ import { HomeComponent } from './home/home.component';
 import { QuestionComponent } from './question/question.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
+import { QuestionDetailComponent } from './question/question-detail/question-detail.component';
+import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
     QuestionComponent,
     SignUpComponent,
     SignInComponent,
+    QuestionDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,13 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
     AppRoutingModule,
     MDBBootstrapModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

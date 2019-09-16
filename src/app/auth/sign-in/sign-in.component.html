@@ -5,32 +5,52 @@
   <strong>Error!</strong> {{ errorMessage }}
 </div>
 
-<form class="text-center border border-light p-5" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+<form class="border border-light p-5" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
 
-  <p class="h4 mb-4">Sign In</p>
+  <p class="h4 text-center mb-4">Sign In</p>
 
-  <!-- Email -->
-  <input
-    type="email"
-    formControlName="email"
-    id="SignUpFormEmail"
-    mdbInput
-    email
-    class="form-control mb-4"
-    placeholder="E-mail">
+  <div class="md-form">
+    <mdb-icon fas icon="user-alt" class="prefix"></mdb-icon>
+    <input mdbInput mdbValidate email type="email" id="email" class="form-control" formControlName="email">
+    <label for="email">Email</label>
+    <mdb-error *ngIf="inputEmail.invalid && (inputEmail.dirty || inputEmail.touched)">Email invalid</mdb-error>
+    <mdb-success *ngIf="inputEmail.valid && (inputEmail.dirty || inputEmail.touched)"></mdb-success>
+  </div>
 
-  <!-- Email -->
-  <input
-    type="password"
-    formControlName="password"
-    id="SignUpFormPassword"
-    mdbInput
-    class="form-control mb-4"
-    placeholder="Password">
+  <div class="md-form">
+    <mdb-icon fas icon="key" class="prefix"></mdb-icon>
+    <input mdbInput mdbValidate type="password" id="password" class="form-control" formControlName="password">
+    <label for="password">Password</label>
+  </div>
+
+<!--  &lt;!&ndash; Email &ndash;&gt;-->
+<!--  <input-->
+<!--    type="email"-->
+<!--    formControlName="email"-->
+<!--    id="SignUpFormEmail"-->
+<!--    mdbInput-->
+<!--    email-->
+<!--    class="form-control mb-4"-->
+<!--    placeholder="E-mail">-->
+
+<!--  &lt;!&ndash; Password &ndash;&gt;-->
+<!--  <input-->
+<!--    type="password"-->
+<!--    formControlName="password"-->
+<!--    id="SignUpFormPassword"-->
+<!--    mdbInput-->
+<!--    class="form-control mb-4"-->
+<!--    placeholder="Password">-->
 
   <!-- Send button -->
-  <button mdbBtn color="info" outline="true" block="true" class="z-depth-0 my-4 waves-effect"
-          mdbWavesEffect type="submit" [disabled]="!signInForm.valid">Send
+  <button mdbBtn color="info"
+          outline="true" block="true"
+          class="z-depth-0 my-4 waves-effect"
+          mdbWavesEffect
+          type="submit"
+          [disabled]="!signInForm.valid">
+    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" [hidden]="!isLoading"></span>
+    Send
   </button>
 
 </form>

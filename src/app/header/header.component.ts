@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthenticationService } from '../authentication.service';
+
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +8,7 @@ import { AuthenticationService } from '../authentication.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private authService: AuthenticationService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {}
 }

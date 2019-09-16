@@ -24,7 +24,7 @@ export interface TokenPayload {
 }
 
 @Injectable({ providedIn: 'root' })
-export class AuthenticationService {
+export class AuthService {
   private token: string;
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -73,7 +73,7 @@ export class AuthenticationService {
     this.token = token;
   }
 
-  private getToken(): string {
+  public getToken(): string {
     if (!this.token) {
       this.token = localStorage.getItem('access_token');
     }

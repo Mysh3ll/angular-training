@@ -1,1 +1,30 @@
-<p>question works!</p>
+<div class="row mx-1">
+  <div class="col-md-4 mb-4" *ngFor="let question of questions">
+    <!-- Card -->
+    <mdb-card>
+      <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+        <!-- Card img -->
+        <mdb-card-img src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg" alt="Card image cap"></mdb-card-img>
+        <a>
+          <div class="mask"></div>
+        </a>
+      </div>
+      <!--Card content-->
+      <mdb-card-body>
+        <!--Title-->
+        <mdb-card-title>
+          <h4>{{ question.title }}</h4>
+        </mdb-card-title>
+
+        <!--Text-->
+        <mdb-card-text>
+          <p>{{ question.description }}</p>
+          <p>{{ question.createdAt | date:'fullDate' }}</p>
+        </mdb-card-text>
+
+        <a [routerLink]="['/questions', question._id.toString()]" mdbBtn color="primary" mdbWavesEffect>Button</a>
+      </mdb-card-body>
+    </mdb-card>
+    <!-- Card -->
+  </div>
+</div>
