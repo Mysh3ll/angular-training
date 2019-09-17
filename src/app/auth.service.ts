@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 
 export interface UserDetails {
-  _id: string;
+  id: string;
   email: string;
   exp: number;
   iat: number;

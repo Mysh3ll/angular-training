@@ -1,3 +1,9 @@
+<div class="row mx-2 my-3">
+  <button mdbBtn type="button" gradient="blue" rounded="true" block="true" size="lg" mdbWavesEffect (click)="onAddQuestion()">
+    <mdb-icon fas icon="plus" class="mr-1"></mdb-icon>Add question
+  </button>
+</div>
+
 <div class="row mx-1">
   <div class="col-md-4 mb-4" *ngFor="let question of questions">
     <!-- Card -->
@@ -22,9 +28,20 @@
           <p>{{ question.createdAt | date:'fullDate' }}</p>
         </mdb-card-text>
 
-        <a [routerLink]="['/questions', question._id.toString()]" mdbBtn color="primary" mdbWavesEffect>Button</a>
+        <a [routerLink]="['/questions', question._id.toString()]" mdbBtn color="primary" mdbWavesEffect>
+          <mdb-icon fas icon="eye" class="mr-1"></mdb-icon>Show
+        </a>
+
+        <button mdbBtn type="button" color="secondary" mdbWavesEffect [disabled]="onDisableQuestion(question)" (click)="onEditQuestion(question)">
+          <mdb-icon fas icon="pen" class="mr-1"></mdb-icon>Edit
+        </button>
+
+<!--        <a mdbBtn color="secondary" mdbWavesEffect>-->
+<!--          <mdb-icon fas icon="pen" class="mr-1"></mdb-icon>Edit-->
+<!--        </a>-->
       </mdb-card-body>
     </mdb-card>
     <!-- Card -->
   </div>
 </div>
+

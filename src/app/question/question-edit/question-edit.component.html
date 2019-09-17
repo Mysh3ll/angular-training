@@ -1,0 +1,68 @@
+<div *ngIf="errorMessage" #alert class="alert alert-danger alert-dismissible fade show" role="alert">
+  <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <strong>Error!</strong> {{ errorMessage }}
+</div>
+
+<form class="border border-light p-5" [formGroup]="questionForm" (ngSubmit)="onSubmit()" *ngIf="questionForm">
+
+  <p class="h4 text-center mb-4">Question</p>
+
+  <div class="md-form">
+    <input mdbInput mdbValidate type="text" id="title" class="form-control" formControlName="title">
+    <label for="title">Title</label>
+    <mdb-error *ngIf="inputTitle.invalid && (inputTitle.dirty || inputTitle.touched)">Title invalid</mdb-error>
+    <mdb-success *ngIf="inputTitle.valid && (inputTitle.dirty || inputTitle.touched)"></mdb-success>
+  </div>
+
+  <div class="md-form">
+    <input mdbInput mdbValidate type="text" id="description" class="form-control" formControlName="description">
+    <label for="description">Description</label>
+    <mdb-error *ngIf="inputDescription.invalid && (inputDescription.dirty || inputDescription.touched)">Description
+      invalid
+    </mdb-error>
+    <mdb-success *ngIf="inputDescription.valid && (inputDescription.dirty || inputDescription.touched)"></mdb-success>
+  </div>
+
+  <div formArrayName="tags" *ngFor="let tag of inputTagsControls; let i = index;">
+    <div class="md-form" [formGroupName]="i">
+      <input mdbInput mdbValidate type="text" id="tag{{i}}" class="form-control" formControlName="tag">
+      <label for="tag{{i}}">Tag</label>
+
+      <mdb-badge pill="true" danger="true" style="cursor: pointer;" (click)="onDeleteTag(i)">
+        <mdb-icon fas icon="trash"></mdb-icon>
+      </mdb-badge>
+    </div>
+  </div>
+
+  <button mdbBtn type="button" color="default" size="sm" mdbWavesEffect (click)="onAddTag()">
+    <mdb-icon fas icon="plus" class="mr-1"></mdb-icon>
+    Add tag
+  </button>
+
+  <!-- Send button -->
+  <button mdbBtn color="info"
+          outline="true"
+          block="true"
+          class="z-depth-0 my-4 waves-effect"
+          mdbWavesEffect
+          type="submit"
+          [disabled]="!questionForm.valid">
+    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" [hidden]="!isLoading"></span>
+    Send
+  </button>
+
+  <!-- Delete button -->
+  <button mdbBtn color="danger"
+          block="true"
+          class="z-depth-0 my-4 waves-effect"
+          mdbWavesEffect
+          type="button"
+          (click)="deleteQuestion()"
+  >
+    Delete
+  </button>
+
+</form>
+<!-- Default form register -->

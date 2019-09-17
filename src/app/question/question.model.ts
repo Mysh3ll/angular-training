@@ -4,6 +4,7 @@ export class Question {
   public description: string;
   public tags: string[];
   public createdAt: Date;
+  public createdBy: string;
 
   constructor(title: string, description: string, tags: string[], createdAt: Date) {
     this.title = title;

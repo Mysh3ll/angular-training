@@ -14,6 +14,7 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { QuestionDetailComponent } from './question/question-detail/question-detail.component';
 import { AuthInterceptor } from './auth.interceptor';
+import { QuestionEditComponent } from './question/question-edit/question-edit.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AuthInterceptor } from './auth.interceptor';
     SignUpComponent,
     SignInComponent,
     QuestionDetailComponent,
+    QuestionEditComponent,
   ],
   imports: [
     BrowserModule,

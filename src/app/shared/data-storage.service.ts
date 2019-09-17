@@ -19,20 +19,16 @@ export class DataStorageService {
     private authService: AuthService,
   ) {}
 
-  // storeQuestions() {
-  //   const recipes = this.questionService.getQuestions();
-  //   this.http
-  //     .put('https://ng-course-recipe-book-65f10.firebaseio.com/recipes.json', recipes)
-  //     .subscribe(response => {
-  //       console.log(response);
-  //     });
-  // }
+  storeQuestion(question: Question) {
+    // const question = this.questionService.getQuestion();
+    return this.http.post(`${environment.api_uri}/questions/`, question);
+  }
 
   fetchQuestions() {
     return this.http.get<ApiQuestion>(`${environment.api_uri}/questions/`).pipe(
       map(data => {
-        // Order by title
-        data.questions.sort((a, b) => (a.title < b.title ? -1 : 1));
+        // Order by date (createdAt) DESC
+        data.questions.sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
         return data;
       }),
       tap(data => {
@@ -47,5 +43,13 @@ export class DataStorageService {
         this.questionService.setQuestion(data.question);
       }),
     );
+  }
+
+  patchQuestion(_id: string, question: Question) {
+    return this.http.patch(`${environment.api_uri}/questions/${_id}`, question);
+  }
+
+  deleteQuestion(_id: string) {
+    return this.http.delete(`${environment.api_uri}/questions/${_id}`);
   }
 }
