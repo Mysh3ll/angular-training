@@ -29,27 +29,4 @@ export class QuestionService {
   getQuestion() {
     return this.question;
   }
-
-  // getRecipe(index: number) {
-  //   return this.questions[index];
-  // }
-  //
-  // addIngredientsToShoppingList(ingredients: Ingredient[]) {
-  //   this.slService.addIngredients(ingredients);
-  // }
-  //
-  // addRecipe(recipe: Recipe) {
-  //   this.questions.push(recipe);
-  //   this.recipesChanged.next(this.questions.slice());
-  // }
-  //
-  // updateRecipe(index: number, newRecipe: Recipe) {
-  //   this.questions[index] = newRecipe;
-  //   this.recipesChanged.next(this.questions.slice());
-  // }
-  //
-  // deleteRecipe(index: number) {
-  //   this.questions.splice(index, 1);
-  //   this.recipesChanged.next(this.questions.slice());
-  // }
 }

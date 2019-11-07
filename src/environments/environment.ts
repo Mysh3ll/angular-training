@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   api_uri: '/api/v1/',
+  ws_url: 'http://localhost:3000',
 };
 
 /*

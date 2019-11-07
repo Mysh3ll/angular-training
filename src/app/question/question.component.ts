@@ -6,6 +6,7 @@ import { QuestionService } from './question.service';
 import { AuthService, UserDetails } from '../auth.service';
 import { DataStorageService } from '../shared/data-storage.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { WebsocketService, EventName } from '../shared/websocket.service';
 
 @Component({
   selector: 'app-question',
@@ -15,7 +16,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class QuestionComponent implements OnInit, OnDestroy {
   questions: Question[];
   userDetails: UserDetails;
-  subscription: Subscription;
+  subQuestion: Subscription;
+  subWebSocket: Subscription;
 
   constructor(
     private questionService: QuestionService,
@@ -23,15 +25,23 @@ export class QuestionComponent implements OnInit, OnDestroy {
     private dataStorageService: DataStorageService,
     private router: Router,
     private route: ActivatedRoute,
+    private wsService: WebsocketService,
   ) {}
 
   ngOnInit() {
     this.dataStorageService.fetchQuestions().subscribe();
-    this.subscription = this.questionService.questionsChanged.subscribe((questions: Question[]) => {
+    this.subQuestion = this.questionService.questionsChanged.subscribe((questions: Question[]) => {
       this.questions = questions;
     });
     this.questions = this.questionService.getQuestions();
     this.userDetails = this.authService.getUserDetails();
+
+    // socket.io
+    this.subWebSocket = this.wsService
+      .listen(EventName.Question)
+      .subscribe((questions: Question) => {
+        this.questions = [questions, ...this.questions];
+      });
   }
 
   onAddQuestion() {
@@ -47,6 +57,11 @@ export class QuestionComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (this.subQuestion) {
+      this.subQuestion.unsubscribe();
+    }
+    if (this.subWebSocket) {
+      this.subWebSocket.unsubscribe();
+    }
   }
 }
